@@ -5,8 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#102b50">
-<meta name="description" content="Perpustakaan Digital 1 Banaran">
-<title>Perpustakaan 1 Banaran | Digital Library</title>
+<title>Perpustakaan 1 Banaran</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -17,29 +16,18 @@
 *{font-family:'Plus Jakarta Sans',sans-serif;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:#f5f7fb;color:#172033}
-.hero{
-background:linear-gradient(120deg,#0c1e38,#123e68,#12618b);
-position:relative;overflow:hidden
-}
-.hero:before{
-content:"";position:absolute;width:450px;height:450px;
-border-radius:50%;background:#38bdf8;opacity:.08;
-filter:blur(80px);right:-100px;top:-150px
-}
-.glass{background:rgba(255,255,255,.12);backdrop-filter:blur(15px)}
+.hero{background:linear-gradient(120deg,#0c1e38,#123e68,#12618b);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:450px;height:450px;border-radius:50%;background:#38bdf8;opacity:.08;filter:blur(80px);right:-100px;top:-150px}
 .book-card{transition:.3s}
 .book-card:hover{transform:translateY(-6px);box-shadow:0 15px 35px #102b5018}
 .modal{background:rgba(5,15,30,.72);backdrop-filter:blur(8px)}
 input,button{outline:none}
 input:focus{border-color:#2563eb!important;box-shadow:0 0 0 3px #2563eb18}
-::-webkit-scrollbar{width:7px}
-::-webkit-scrollbar-thumb{background:#b8c7d9;border-radius:10px}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header class="bg-white sticky top-0 z-40 shadow-sm">
 <nav class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
 
@@ -54,13 +42,13 @@ input:focus{border-color:#2563eb!important;box-shadow:0 0 0 3px #2563eb18}
 </a>
 
 <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
-<a href="#home" class="hover:text-blue-700">Beranda</a>
-<a href="#katalog" class="hover:text-blue-700">Katalog Buku</a>
-<a href="#tentang" class="hover:text-blue-700">Tentang</a>
+<a href="#home">Beranda</a>
+<a href="#katalog">Katalog Buku</a>
+<a href="#tentang">Tentang</a>
 </div>
 
 <div id="navAuth">
-<button onclick="openModal('loginModal')" class="bg-blue-950 hover:bg-blue-800 text-white px-5 py-3 rounded-xl text-sm font-bold">
+<button onclick="openModal('loginModal')" class="bg-blue-950 text-white px-5 py-3 rounded-xl text-sm font-bold">
 <i class="fa-solid fa-user mr-2"></i>Login
 </button>
 </div>
@@ -68,12 +56,11 @@ input:focus{border-color:#2563eb!important;box-shadow:0 0 0 3px #2563eb18}
 </nav>
 </header>
 
-<!-- HERO -->
 <section id="home" class="hero text-white">
 <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center relative z-10">
 
 <div>
-<div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-xs font-semibold">
+<div class="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-xs font-semibold">
 <i class="fa-solid fa-book-open text-cyan-300"></i>
 PUSAT LITERASI DIGITAL
 </div>
@@ -82,28 +69,22 @@ PUSAT LITERASI DIGITAL
 Jelajahi Dunia Melalui <span class="text-cyan-300">Buku.</span>
 </h2>
 
-<p class="text-blue-100 mt-6 leading-8 text-sm md:text-base max-w-xl">
+<p class="text-blue-100 mt-6 leading-8 text-sm md:text-base">
 Selamat datang di Perpustakaan 1 Banaran. Temukan berbagai koleksi buku, perluas wawasan, dan bangun masa depan melalui budaya membaca.
 </p>
 
 <div class="flex flex-wrap gap-3 mt-8">
-<a href="#katalog" class="bg-white text-blue-950 px-7 py-4 rounded-xl font-bold text-sm hover:bg-cyan-100">
-Jelajahi Buku <i class="fa-solid fa-arrow-right ml-2"></i>
+<a href="#katalog" class="bg-white text-blue-950 px-7 py-4 rounded-xl font-bold text-sm">
+Jelajahi Buku →
 </a>
-<button onclick="openModal('registerModal')" class="glass border border-white/20 px-7 py-4 rounded-xl font-bold text-sm">
+<button onclick="openModal('registerModal')" class="bg-white/10 border border-white/20 px-7 py-4 rounded-xl font-bold text-sm">
 Daftar Anggota
 </button>
 </div>
 
 <div class="flex gap-8 mt-12">
-<div>
-<h3 class="text-3xl font-extrabold" id="heroTotal">0</h3>
-<p class="text-xs text-blue-200 mt-1">Koleksi Buku</p>
-</div>
-<div>
-<h3 class="text-3xl font-extrabold">24/7</h3>
-<p class="text-xs text-blue-200 mt-1">Akses Digital</p>
-</div>
+<div><h3 class="text-3xl font-extrabold" id="heroTotal">0</h3><p class="text-xs text-blue-200">Koleksi Buku</p></div>
+<div><h3 class="text-3xl font-extrabold">24/7</h3><p class="text-xs text-blue-200">Akses Digital</p></div>
 </div>
 </div>
 
@@ -111,63 +92,46 @@ Daftar Anggota
 <div class="relative w-80 h-80 rounded-full border border-white/20 flex items-center justify-center">
 <div class="absolute inset-5 rounded-full border border-white/20"></div>
 <div class="absolute inset-12 rounded-full border border-white/20"></div>
-<div class="text-9xl text-cyan-200">
-<i class="fa-solid fa-book-open"></i>
-</div>
-<div class="absolute top-5 right-10 text-3xl text-yellow-300">
-<i class="fa-solid fa-star"></i>
-</div>
-<div class="absolute bottom-10 left-0 text-2xl text-cyan-200">
-<i class="fa-solid fa-sparkles"></i>
+<div class="text-9xl text-cyan-200"><i class="fa-solid fa-book-open"></i></div>
 </div>
 </div>
-</div>
-
 </div>
 </section>
 
-<!-- STATISTIK -->
 <section class="max-w-7xl mx-auto px-6 -mt-8 relative z-20">
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-
 <div class="bg-white p-6 rounded-2xl shadow-lg">
 <div class="text-blue-700 text-xl"><i class="fa-solid fa-book"></i></div>
 <h3 id="statBooks" class="text-3xl font-extrabold mt-3">0</h3>
-<p class="text-sm text-gray-500 mt-1">Total Buku</p>
+<p class="text-sm text-gray-500">Total Buku</p>
 </div>
-
 <div class="bg-white p-6 rounded-2xl shadow-lg">
 <div class="text-blue-700 text-xl"><i class="fa-solid fa-box-open"></i></div>
 <h3 id="statStock" class="text-3xl font-extrabold mt-3">0</h3>
-<p class="text-sm text-gray-500 mt-1">Stok Tersedia</p>
+<p class="text-sm text-gray-500">Stok Tersedia</p>
 </div>
-
 <div class="bg-white p-6 rounded-2xl shadow-lg col-span-2 md:col-span-1">
 <div class="text-blue-700 text-xl"><i class="fa-solid fa-graduation-cap"></i></div>
 <h3 class="text-2xl font-extrabold mt-3">Literasi</h3>
-<p class="text-sm text-gray-500 mt-1">Belajar Tanpa Batas</p>
+<p class="text-sm text-gray-500">Belajar Tanpa Batas</p>
 </div>
-
 </div>
 </section>
 
-<!-- KATALOG -->
 <section id="katalog" class="max-w-7xl mx-auto px-6 py-20">
-
 <div class="flex flex-col md:flex-row justify-between gap-6 mb-10">
 <div>
 <p class="text-blue-700 font-extrabold text-xs tracking-widest">KOLEKSI KAMI</p>
 <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Jelajahi Buku</h2>
 <p class="text-gray-500 mt-2 text-sm">Temukan bacaan yang sesuai dengan minatmu.</p>
 </div>
-
 <div class="relative w-full md:w-80">
 <i class="fa-solid fa-search absolute left-4 top-4 text-gray-400"></i>
-<input id="searchInput" oninput="renderBooks()" type="search" placeholder="Cari judul atau penulis..." class="bg-white border border-gray-200 rounded-xl py-3 pl-11 pr-4 w-full">
+<input id="searchInput" type="search" placeholder="Cari judul atau penulis..." class="bg-white border border-gray-200 rounded-xl py-3 pl-11 pr-4 w-full">
 </div>
 </div>
 
-<div id="categoryButtons" class="flex gap-2 flex-wrap mb-8">
+<div class="flex gap-2 flex-wrap mb-8">
 <button onclick="filterBooks('Semua',this)" class="category-btn bg-blue-950 text-white px-5 py-3 rounded-full text-xs font-bold">Semua</button>
 <button onclick="filterBooks('Pelajaran',this)" class="category-btn bg-white px-5 py-3 rounded-full text-xs font-bold">Pelajaran</button>
 <button onclick="filterBooks('Novel',this)" class="category-btn bg-white px-5 py-3 rounded-full text-xs font-bold">Novel</button>
@@ -181,15 +145,9 @@ Daftar Anggota
 </div>
 
 <div id="bookList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
-
-<div id="emptyBooks" class="hidden text-center py-16">
-<i class="fa-solid fa-book-open text-5xl text-gray-300"></i>
-<p class="text-gray-500 mt-4">Buku tidak ditemukan.</p>
-</div>
-
+<div id="emptyBooks" class="hidden text-center py-16 text-gray-500">Buku tidak ditemukan.</div>
 </section>
 
-<!-- TENTANG -->
 <section id="tentang" class="bg-white py-20">
 <div class="max-w-5xl mx-auto px-6 text-center">
 <div class="w-16 h-16 rounded-2xl bg-blue-950 text-white flex items-center justify-center mx-auto text-2xl">
@@ -197,103 +155,56 @@ Daftar Anggota
 </div>
 <p class="text-blue-700 text-xs font-extrabold tracking-widest mt-6">TENTANG KAMI</p>
 <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Perpustakaan 1 Banaran</h2>
-<p class="text-gray-500 leading-8 mt-6 max-w-3xl mx-auto">
-Perpustakaan 1 Banaran hadir sebagai pusat informasi, sumber ilmu pengetahuan, dan tempat tumbuhnya budaya literasi. Kami menyediakan koleksi bacaan untuk mendukung kegiatan belajar dan meningkatkan wawasan.
-</p>
+<p class="text-gray-500 leading-8 mt-6">Perpustakaan 1 Banaran hadir sebagai pusat informasi, sumber ilmu pengetahuan, dan tempat tumbuhnya budaya literasi.</p>
 </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-slate-950 text-white py-12">
-<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-<div>
+<footer class="bg-slate-950 text-white py-12 text-center">
 <h2 class="font-extrabold text-xl">PERPUSTAKAAN 1 BANARAN</h2>
 <p class="text-gray-400 text-sm mt-3">Membaca Hari Ini, Membangun Masa Depan.</p>
-</div>
-<div class="md:text-right">
-<p class="text-gray-400 text-sm">Digital Library</p>
-<p class="text-gray-500 text-xs mt-3">© 2026 Perpustakaan 1 Banaran.</p>
-</div>
-</div>
+<p class="text-gray-500 text-xs mt-5">© 2026 Perpustakaan 1 Banaran</p>
 </footer>
 
-<!-- MODAL LOGIN -->
+<!-- LOGIN -->
 <div id="loginModal" class="modal hidden fixed inset-0 z-50 items-center justify-center p-5">
-<div class="bg-white rounded-3xl p-7 md:p-9 w-full max-w-md relative">
-<button onclick="closeModal('loginModal')" class="absolute right-6 top-5 text-gray-400 text-2xl">&times;</button>
-
-<div class="w-14 h-14 bg-blue-950 text-white rounded-2xl flex items-center justify-center text-xl">
-<i class="fa-solid fa-user"></i>
-</div>
-
-<h2 class="text-2xl font-extrabold mt-5">Selamat Datang!</h2>
+<div class="bg-white rounded-3xl p-7 w-full max-w-md relative">
+<button onclick="closeModal('loginModal')" class="absolute right-6 top-5 text-2xl">×</button>
+<h2 class="text-2xl font-extrabold mt-3">Selamat Datang!</h2>
 <p class="text-sm text-gray-500 mt-2">Masuk ke akun perpustakaanmu.</p>
-
 <form onsubmit="handleLogin(event)" class="mt-7 space-y-4">
-<div>
-<label class="text-xs font-bold">EMAIL</label>
-<input id="loginEmail" type="email" required placeholder="nama@email.com" class="w-full border rounded-xl p-4 mt-2">
-</div>
-<div>
-<label class="text-xs font-bold">PASSWORD</label>
-<input id="loginPassword" type="password" required placeholder="Masukkan password" class="w-full border rounded-xl p-4 mt-2">
-</div>
-<button id="loginButton" class="w-full bg-blue-950 hover:bg-blue-800 text-white py-4 rounded-xl font-bold">
-Masuk Sekarang
-</button>
+<input id="loginEmail" type="email" required placeholder="Email" class="w-full border rounded-xl p-4">
+<input id="loginPassword" type="password" required placeholder="Password" class="w-full border rounded-xl p-4">
+<button id="loginButton" class="w-full bg-blue-950 text-white py-4 rounded-xl font-bold">Masuk Sekarang</button>
 </form>
-
 <p id="loginMessage" class="text-sm text-center mt-4"></p>
-<p class="text-center text-sm text-gray-500 mt-6">
-Belum punya akun?
-<button onclick="switchModal('loginModal','registerModal')" class="text-blue-700 font-bold">Daftar</button>
-</p>
+<p class="text-center text-sm text-gray-500 mt-6">Belum punya akun?
+<button onclick="switchModal('loginModal','registerModal')" class="text-blue-700 font-bold">Daftar</button></p>
 </div>
 </div>
 
-<!-- MODAL REGISTER -->
+<!-- REGISTER -->
 <div id="registerModal" class="modal hidden fixed inset-0 z-50 items-center justify-center p-5">
-<div class="bg-white rounded-3xl p-7 md:p-9 w-full max-w-md relative">
-<button onclick="closeModal('registerModal')" class="absolute right-6 top-5 text-gray-400 text-2xl">&times;</button>
-
-<div class="w-14 h-14 bg-blue-950 text-white rounded-2xl flex items-center justify-center text-xl">
-<i class="fa-solid fa-user-plus"></i>
-</div>
-
-<h2 class="text-2xl font-extrabold mt-5">Daftar Anggota</h2>
+<div class="bg-white rounded-3xl p-7 w-full max-w-md relative">
+<button onclick="closeModal('registerModal')" class="absolute right-6 top-5 text-2xl">×</button>
+<h2 class="text-2xl font-extrabold mt-3">Daftar Anggota</h2>
 <p class="text-sm text-gray-500 mt-2">Buat akun perpustakaan digital.</p>
-
 <form onsubmit="handleRegister(event)" class="mt-7 space-y-4">
-<div>
-<label class="text-xs font-bold">NAMA LENGKAP</label>
-<input id="registerName" type="text" required placeholder="Nama lengkap" class="w-full border rounded-xl p-4 mt-2">
-</div>
-<div>
-<label class="text-xs font-bold">EMAIL</label>
-<input id="registerEmail" type="email" required placeholder="nama@email.com" class="w-full border rounded-xl p-4 mt-2">
-</div>
-<div>
-<label class="text-xs font-bold">PASSWORD</label>
-<input id="registerPassword" type="password" minlength="6" required placeholder="Minimal 6 karakter" class="w-full border rounded-xl p-4 mt-2">
-</div>
-<button id="registerButton" class="w-full bg-blue-950 text-white py-4 rounded-xl font-bold">
-Buat Akun
-</button>
+<input id="registerName" type="text" required placeholder="Nama lengkap" class="w-full border rounded-xl p-4">
+<input id="registerEmail" type="email" required placeholder="Email" class="w-full border rounded-xl p-4">
+<input id="registerPassword" type="password" minlength="6" required placeholder="Password minimal 6 karakter" class="w-full border rounded-xl p-4">
+<button id="registerButton" class="w-full bg-blue-950 text-white py-4 rounded-xl font-bold">Buat Akun</button>
 </form>
-
 <p id="registerMessage" class="text-sm text-center mt-4"></p>
-<p class="text-center text-sm text-gray-500 mt-6">
-Sudah punya akun?
-<button onclick="switchModal('registerModal','loginModal')" class="text-blue-700 font-bold">Login</button>
-</p>
+<p class="text-center text-sm text-gray-500 mt-6">Sudah punya akun?
+<button onclick="switchModal('registerModal','loginModal')" class="text-blue-700 font-bold">Login</button></p>
 </div>
 </div>
 
-<!-- MODAL STATUS -->
+<!-- STATUS -->
 <div id="statusModal" class="modal hidden fixed inset-0 z-[60] items-center justify-center p-5">
 <div class="bg-white p-8 rounded-3xl w-full max-w-sm text-center">
-<div class="text-5xl text-blue-700 mb-4"><i class="fa-solid fa-circle-check"></i></div>
-<h3 class="font-extrabold text-xl">Informasi</h3>
+<i class="fa-solid fa-circle-info text-5xl text-blue-700"></i>
+<h3 class="font-extrabold text-xl mt-4">Informasi</h3>
 <p id="statusText" class="text-gray-500 text-sm mt-3"></p>
 <button onclick="closeModal('statusModal')" class="bg-blue-950 text-white px-8 py-3 rounded-xl mt-6 font-bold">Tutup</button>
 </div>
@@ -301,47 +212,32 @@ Sudah punya akun?
 
 <script>
 // =====================================
-// 1. KONFIGURASI SUPABASE
+// SUPABASE CONFIGURATION
 // =====================================
 
 const SUPABASE_URL = "ISI_PROJECT_URL";
-const SUPABASE_KEY = "ISI_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_Vx4E50Qbbmh14wZ5NuftDw_qj3avOtg";
 
-let db = null;
-let supabaseReady = false;
-
-if (
-SUPABASE_URL.startsWith("https://") &&
-SUPABASE_KEY !== "ISI_PUBLISHABLE_KEY"
-) {
-db = supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-supabaseReady = true;
-}
+const db = SUPABASE_URL.startsWith("https://")
+? supabase.createClient(SUPABASE_URL,SUPABASE_KEY)
+: null;
 
 // =====================================
-// 2. DATA DAN STATE
+// DATA
 // =====================================
 
 let books = [];
 let activeCategory = "Semua";
 
-const sampleBooks = [
-{id:1,title:"Matematika",author:"Tim Penulis",category:"Pelajaran",stock:10,cover_url:""},
-{id:2,title:"Bahasa Indonesia",author:"Tim Penulis",category:"Pelajaran",stock:8,cover_url:""},
-{id:3,title:"Sejarah Islam",author:"Tim Penulis",category:"Agama",stock:5,cover_url:""},
-{id:4,title:"Ensiklopedia Sains",author:"Tim Penulis",category:"Pengetahuan",stock:7,cover_url:""},
-{id:5,title:"Novel Inspirasi",author:"Tim Penulis",category:"Novel",stock:4,cover_url:""}
-];
-
 const icons = {
-"Pelajaran":"fa-book",
-"Novel":"fa-book-open",
-"Agama":"fa-mosque",
-"Pengetahuan":"fa-lightbulb"
+Pelajaran:"fa-book",
+Novel:"fa-book-open",
+Agama:"fa-mosque",
+Pengetahuan:"fa-lightbulb"
 };
 
 // =====================================
-// 3. MODAL
+// MODAL
 // =====================================
 
 function openModal(id){
@@ -356,9 +252,9 @@ el.classList.add("hidden");
 el.classList.remove("flex");
 }
 
-function switchModal(oldId,newId){
-closeModal(oldId);
-openModal(newId);
+function switchModal(a,b){
+closeModal(a);
+openModal(b);
 }
 
 function showStatus(message){
@@ -367,33 +263,26 @@ openModal("statusModal");
 }
 
 // =====================================
-// 4. LOAD BUKU SUPABASE
+// LOAD BOOKS
 // =====================================
 
 async function loadBooks(){
 const loading=document.getElementById("loadingBooks");
 
-if(!supabaseReady){
-books=sampleBooks;
+if(!db){
 loading.classList.add("hidden");
-renderBooks();
-updateStats();
+showStatus("Project URL Supabase belum diisi.");
 return;
 }
 
 try{
-const {data,error}=await db
-.from("books")
-.select("*")
-.order("id",{ascending:false});
-
+const {data,error}=await db.from("books").select("*").order("id",{ascending:false});
 if(error)throw error;
-
 books=data||[];
 }catch(error){
 console.error(error);
-books=sampleBooks;
-showStatus("Gagal memuat database. Periksa koneksi Supabase.");
+showStatus("Gagal memuat buku: "+error.message);
+books=[];
 }
 
 loading.classList.add("hidden");
@@ -402,36 +291,24 @@ updateStats();
 }
 
 // =====================================
-// 5. TAMPILKAN BUKU
+// RENDER BOOKS
 // =====================================
 
 function renderBooks(){
-
 const query=document.getElementById("searchInput").value.toLowerCase();
 
 const filtered=books.filter(book=>{
-const matchCategory=activeCategory==="Semua"||book.category===activeCategory;
-const matchSearch=
-(book.title||"").toLowerCase().includes(query)||
-(book.author||"").toLowerCase().includes(query);
-
-return matchCategory&&matchSearch;
+const category=activeCategory==="Semua"||book.category===activeCategory;
+const search=(book.title||"").toLowerCase().includes(query)||(book.author||"").toLowerCase().includes(query);
+return category&&search;
 });
 
 const container=document.getElementById("bookList");
-const empty=document.getElementById("emptyBooks");
-
 container.innerHTML="";
 
-if(filtered.length===0){
-empty.classList.remove("hidden");
-return;
-}
-
-empty.classList.add("hidden");
+document.getElementById("emptyBooks").classList.toggle("hidden",filtered.length!==0);
 
 filtered.forEach(book=>{
-
 const card=document.createElement("div");
 card.className="book-card bg-white rounded-2xl p-4 border border-gray-100 shadow-sm";
 
@@ -443,7 +320,6 @@ const img=document.createElement("img");
 img.src=book.cover_url;
 img.alt=book.title;
 img.className="w-full h-full object-cover";
-img.onerror=()=>{cover.textContent="📚"};
 cover.appendChild(img);
 }else{
 const icon=document.createElement("i");
@@ -468,11 +344,9 @@ stock.className="text-xs text-gray-500 mt-3";
 stock.textContent="Stok tersedia: "+book.stock;
 
 const button=document.createElement("button");
-button.className="w-full bg-blue-950 hover:bg-blue-800 text-white py-3 rounded-xl text-xs font-bold mt-4";
+button.className="w-full bg-blue-950 text-white py-3 rounded-xl text-xs font-bold mt-4";
 button.textContent=book.stock>0?"Pinjam Buku":"Stok Habis";
 button.disabled=book.stock<=0;
-if(book.stock<=0)button.classList.add("opacity-50","cursor-not-allowed");
-
 button.onclick=()=>borrowBook(book.id);
 
 card.append(cover,title,author,category,stock,button);
@@ -481,7 +355,7 @@ container.appendChild(card);
 }
 
 // =====================================
-// 6. FILTER KATEGORI
+// FILTER
 // =====================================
 
 function filterBooks(category,button){
@@ -492,39 +366,33 @@ btn.className="category-btn bg-white text-gray-700 px-5 py-3 rounded-full text-x
 });
 
 button.className="category-btn bg-blue-950 text-white px-5 py-3 rounded-full text-xs font-bold";
-
 renderBooks();
 }
 
 // =====================================
-// 7. STATISTIK
+// STATISTICS
 // =====================================
 
 function updateStats(){
 const total=books.length;
 const stock=books.reduce((sum,b)=>sum+(Number(b.stock)||0),0);
-
 document.getElementById("statBooks").textContent=total;
 document.getElementById("statStock").textContent=stock;
 document.getElementById("heroTotal").textContent=total;
 }
 
 // =====================================
-// 8. REGISTRASI
+// REGISTER
 // =====================================
 
 async function handleRegister(event){
 event.preventDefault();
 
-if(!supabaseReady){
-showStatus("Masukkan Project URL dan Publishable Key Supabase terlebih dahulu.");
-return;
-}
+if(!db)return showStatus("Project URL belum diisi.");
 
 const name=document.getElementById("registerName").value.trim();
 const email=document.getElementById("registerEmail").value.trim();
 const password=document.getElementById("registerPassword").value;
-
 const button=document.getElementById("registerButton");
 const message=document.getElementById("registerMessage");
 
@@ -535,24 +403,16 @@ try{
 const {data,error}=await db.auth.signUp({
 email,
 password,
-options:{
-data:{full_name:name}
-}
+options:{data:{full_name:name}}
 });
 
 if(error)throw error;
 
-if(data.session){
-message.textContent="Pendaftaran berhasil! Silakan login.";
-message.className="text-green-600 text-sm text-center mt-4";
-}else{
-message.textContent="Akun dibuat. Jika konfirmasi email aktif, periksa email kamu.";
-message.className="text-blue-700 text-sm text-center mt-4";
-}
+message.textContent=data.session
+?"Registrasi berhasil! Silakan login."
+:"Akun dibuat. Jika konfirmasi email aktif, periksa email kamu.";
 
-document.querySelector("#registerName").value="";
-document.querySelector("#registerEmail").value="";
-document.querySelector("#registerPassword").value="";
+message.className="text-green-600 text-sm text-center mt-4";
 
 }catch(error){
 message.textContent=error.message;
@@ -564,20 +424,16 @@ button.textContent="Buat Akun";
 }
 
 // =====================================
-// 9. LOGIN
+// LOGIN
 // =====================================
 
 async function handleLogin(event){
 event.preventDefault();
 
-if(!supabaseReady){
-showStatus("Konfigurasi Supabase belum diisi.");
-return;
-}
+if(!db)return showStatus("Project URL belum diisi.");
 
 const email=document.getElementById("loginEmail").value.trim();
 const password=document.getElementById("loginPassword").value;
-
 const button=document.getElementById("loginButton");
 const message=document.getElementById("loginMessage");
 
@@ -585,34 +441,20 @@ button.disabled=true;
 button.textContent="Memeriksa akun...";
 
 try{
-
-const {data,error}=await db.auth.signInWithPassword({
-email,
-password
-});
-
+const {data,error}=await db.auth.signInWithPassword({email,password});
 if(error)throw error;
 
-const {data:profile,error:profileError}=await db
-.from("profiles")
-.select("role,full_name")
-.eq("id",data.user.id)
-.single();
+const {data:profile,error:profileError}=await db.from("profiles")
+.select("role").eq("id",data.user.id).single();
 
 if(profileError)throw profileError;
 
-if(profile.role==="admin"){
-window.location.href="admin.html";
-}else{
-window.location.href="siswa.html";
-}
+window.location.href=profile.role==="admin"?"admin.html":"siswa.html";
 
 }catch(error){
 message.textContent=error.message;
 message.className="text-red-600 text-sm text-center mt-4";
-
 await db.auth.signOut();
-
 }finally{
 button.disabled=false;
 button.textContent="Masuk Sekarang";
@@ -620,15 +462,11 @@ button.textContent="Masuk Sekarang";
 }
 
 // =====================================
-// 10. PINJAM BUKU
+// BORROW BOOK
 // =====================================
 
 async function borrowBook(bookId){
-
-if(!supabaseReady){
-showStatus("Database belum terhubung.");
-return;
-}
+if(!db)return showStatus("Database belum terhubung.");
 
 const {data,error:authError}=await db.auth.getUser();
 
@@ -639,13 +477,10 @@ return;
 }
 
 try{
-const {error}=await db.rpc("borrow_book",{
-p_book_id:bookId
-});
-
+const {error}=await db.rpc("borrow_book",{p_book_id:bookId});
 if(error)throw error;
 
-showStatus("Peminjaman berhasil! Silakan cek riwayat peminjaman di dashboard siswa.");
+showStatus("Peminjaman berhasil! Silakan cek dashboard siswa.");
 await loadBooks();
 
 }catch(error){
@@ -654,47 +489,31 @@ showStatus(error.message);
 }
 
 // =====================================
-// 11. CEK SESSION
+// SESSION
 // =====================================
 
 async function checkSession(){
-
-if(!supabaseReady)return;
+if(!db)return;
 
 const {data:{session}}=await db.auth.getSession();
-
 if(!session)return;
 
-const {data:profile,error}=await db
-.from("profiles")
-.select("role")
-.eq("id",session.user.id)
-.single();
+const {data:profile}=await db.from("profiles")
+.select("role").eq("id",session.user.id).single();
 
-if(!error&&profile){
+if(!profile)return;
+
 const nav=document.getElementById("navAuth");
-
-const button=document.createElement("button");
-button.className="bg-blue-950 text-white px-4 py-3 rounded-xl text-sm font-bold";
-button.textContent="Dashboard";
-button.onclick=()=>{
-window.location.href=profile.role==="admin"?"admin.html":"siswa.html";
-};
-
-nav.replaceChildren(button);
-}
+const btn=document.createElement("button");
+btn.className="bg-blue-950 text-white px-4 py-3 rounded-xl text-sm font-bold";
+btn.textContent="Dashboard";
+btn.onclick=()=>window.location.href=profile.role==="admin"?"admin.html":"siswa.html";
+nav.replaceChildren(btn);
 }
 
 // =====================================
-// 12. LOGOUT DAN MULAI
+// START
 // =====================================
-
-async function logout(){
-if(!supabaseReady)return;
-
-await db.auth.signOut();
-window.location.reload();
-}
 
 document.getElementById("searchInput").addEventListener("input",renderBooks);
 
@@ -704,7 +523,7 @@ await checkSession();
 }
 
 init();
-
 </script>
+
 </body>
 </html>
